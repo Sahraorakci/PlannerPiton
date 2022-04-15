@@ -1,4 +1,5 @@
 ﻿using PlannerPiton.BusinessLayer.Abstract;
+using PlannerPiton.DataAccessLayer.Abstract;
 using PlannerPiton.DataAccessLayer.EntityFramework;
 using PlannerPiton.EntityLayer.Concrete;
 using System;
@@ -11,34 +12,40 @@ namespace PlannerPiton.BusinessLayer.Concrete
 {
     public class EventManager : IEventService
     {
-        EfEventRepository efEventRepository;
+        IEventDal _eventDal;
         public EventManager()
         {
-            efEventRepository = new EfEventRepository();
+            _eventDal = new EfEventRepository();
         }
+
+        public EventManager(IEventDal eventDal)
+        {
+            _eventDal = eventDal;
+        }
+
         public void AddEvent(Event e)
         {
-            efEventRepository.Insert(e);
+            _eventDal.Insert(e);
         }
 
         public void EventDelete(Event e)
         {
-            efEventRepository.Delete(e);
+            _eventDal.Delete(e);
         }
 
         public void EventUpdate(Event e)
         {
-            efEventRepository.Update(e);
+            _eventDal.Update(e);
         }
 
         public Event GetByID(int id)
         {
-            return efEventRepository.GetByID(id);
+            return _eventDal.GetByID(id);
         }
 
         public List<Event> GetList()
         {
-            return efEventRepository.GetListAll();
+            return _eventDal.GetListAll();
         }
     }
 }

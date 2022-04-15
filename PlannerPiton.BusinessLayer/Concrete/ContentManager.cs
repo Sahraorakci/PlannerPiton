@@ -1,4 +1,5 @@
 ﻿using PlannerPiton.BusinessLayer.Abstract;
+using PlannerPiton.DataAccessLayer.Abstract;
 using PlannerPiton.DataAccessLayer.EntityFramework;
 using PlannerPiton.EntityLayer.Concrete;
 using System;
@@ -13,38 +14,45 @@ namespace PlannerPiton.BusinessLayer.Concrete
     public class ContentManager : IContentService
 
     {
-        EfContentRepository efContentRepository;
+
+        IContentDal _contentDal;
+
+        public ContentManager(IContentDal contentDal)
+        {
+            _contentDal = contentDal;
+        }
         public ContentManager()
         {
-            efContentRepository = new EfContentRepository();
+            _contentDal = new EfContentRepository();
         }
+
         
 
         public void AddContent(Content content)
         {
 
-            efContentRepository.Insert(content);
+            _contentDal.Insert(content);
 
         }
 
         public void ContentDelete(Content content)
         {
-            efContentRepository.Delete(content);
+            _contentDal.Delete(content);
         }
 
         public void ContentUpdate(Content content)
         {
-            efContentRepository.Update(content);
+            _contentDal.Update(content);
         }
 
         public Content GetByID(int id)
         {
-            return efContentRepository.GetByID(id);
+            return _contentDal.GetByID(id);
         }
 
         public List<Content> GetList()
         {
-            return efContentRepository.GetListAll();
+            return _contentDal.GetListAll();
         }
     }
 }

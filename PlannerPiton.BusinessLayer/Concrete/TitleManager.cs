@@ -1,4 +1,5 @@
 ﻿using PlannerPiton.BusinessLayer.Abstract;
+using PlannerPiton.DataAccessLayer.Abstract;
 using PlannerPiton.DataAccessLayer.EntityFramework;
 using PlannerPiton.EntityLayer.Concrete;
 using System;
@@ -11,34 +12,41 @@ namespace PlannerPiton.BusinessLayer.Concrete
 {
     public class TitleManager : ITitleService
     {
-        EfTitleRepository efTitleRepository;
+        ITitleDal _titleDal;
+        public TitleManager(ITitleDal titleDal)
+        {
+            _titleDal = titleDal;
+        }
         public TitleManager()
         {
-            efTitleRepository = new EfTitleRepository();
+            _titleDal = new EfTitleRepository();
         }
+
+        
+
         public void AddTitle(Title title)
         {
-            efTitleRepository.Insert(title);
+            _titleDal.Insert(title);
         }
 
         public Title GetByID(int id)
         {
-            return efTitleRepository.GetByID(id);
+            return _titleDal.GetByID(id);
         }
 
         public List<Title> GetList()
         {
-            return efTitleRepository.GetListAll();
+            return _titleDal.GetListAll();
         }
 
         public void TitleDelete(Title title)
         {
-            efTitleRepository.Delete(title);
+            _titleDal.Delete(title);
         }
 
         public void TitleUpdate(Title title)
         {
-            efTitleRepository.Update(title);
+            _titleDal.Update(title);
         }
     }
 }

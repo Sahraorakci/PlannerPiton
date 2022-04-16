@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlannerPiton.DataAccessLayer.Concrete;
 
 namespace PlannerPiton.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220415192025_mig2")]
+    partial class mig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace PlannerPiton.DataAccessLayer.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TitleID")
+                    b.Property<int>("TitleID")
                         .HasColumnType("int");
 
                     b.HasKey("EventID");
@@ -97,11 +99,15 @@ namespace PlannerPiton.DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlannerPiton.EntityLayer.Concrete.Title", null)
+                    b.HasOne("PlannerPiton.EntityLayer.Concrete.Title", "Title")
                         .WithMany("Events")
-                        .HasForeignKey("TitleID");
+                        .HasForeignKey("TitleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Content");
+
+                    b.Navigation("Title");
                 });
 
             modelBuilder.Entity("PlannerPiton.EntityLayer.Concrete.Content", b =>

@@ -1,4 +1,5 @@
 ﻿using PlannerPiton.EntityLayer.Concrete;
+using PlannerPiton.EntityLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace PlannerPiton.BusinessLayer.Abstract
         void AddEvent(Event e);
         void EventDelete(Event e);
         void EventUpdate(Event e);
-        List<Event> GetList();
+        List<EventDTO> GetList();
         Event GetByID(int id);
     }
 }

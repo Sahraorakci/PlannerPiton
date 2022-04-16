@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PlannerPiton.BusinessLayer.Concrete;
+using PlannerPiton.DataAccessLayer.EntityFramework;
+using PlannerPiton.EntityLayer.Concrete;
 using PlannerPiton.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,7 @@ namespace PlannerPiton.Web.Controllers
         {
             _logger = logger;
         }
+        EventManager em = new EventManager(new EfEventRepository());
 
         public IActionResult Index()
         {
@@ -32,6 +36,20 @@ namespace PlannerPiton.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public ActionResult EditEvent(int id)
+        {
+            var edityvalue = em.GetByID(id);
+            return View(edityvalue);
+
+        }
+        [HttpPost]
+        public ActionResult EditEvent(Event e)
+        {
+            em.EventUpdate(e);
+            return RedirectToAction("Index");
+
         }
     }
 }

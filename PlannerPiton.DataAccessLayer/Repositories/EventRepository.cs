@@ -12,29 +12,29 @@ namespace PlannerPiton.DataAccessLayer.Repositories
     class EventRepository : IEventDal
     {
         Context c = new Context();
-        public void AddEvent(Event e)
+        public void Insert(Event e)
         {
             c.Add(e);
             c.SaveChanges();
         }
 
-        public void DeleteEvent(Event e)
+        public void Delete(Event e)
         {
             c.Remove(e);
             c.SaveChanges();
         }
 
-        public Event GetById(int id)
+        public Event GetByID(int id)
         {
             return c.Events.Find(id);
         }
 
-        public List<Event> ListAllEvent()
+        public List<Event> GetListAll()
         {
             return c.Events.ToList();
         }
 
-        public void UpdateEvent(Event e)
+        public void Update(Event e)
         {
             c.Update(e);
             c.SaveChanges();

@@ -2,9 +2,11 @@
 using PlannerPiton.DataAccessLayer.Abstract;
 using PlannerPiton.DataAccessLayer.EntityFramework;
 using PlannerPiton.EntityLayer.Concrete;
+using PlannerPiton.EntityLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,9 +45,23 @@ namespace PlannerPiton.BusinessLayer.Concrete
             return _eventDal.GetByID(id);
         }
 
-        public List<Event> GetList()
+        public List<EventDTO> GetList()
         {
-            return _eventDal.GetListAll();
+            Expression<Func<Event, bool>> expEvent = c => true;
+
+            var list = _eventDal.GetListAll();
+
+            var dtoList = list.Select(p => new EventDTO
+            {
+                Id = p.EventID,
+                title = p.Name,
+                end = p.EndDate,
+                start = p.StartDate,
+                color = p.BackgroundColor,
+                allDay = p.AllDay
+            }).ToList();
+
+            return dtoList;
         }
     }
 }

@@ -12,29 +12,29 @@ namespace PlannerPiton.DataAccessLayer.Repositories
     class TitleRepository : ITitleDal
     {
         Context c = new Context();
-        public void AddTitle(ITitleDal title)
+        public void Insert(Title title)
         {
             c.Add(title);
             c.SaveChanges();
         }
 
-        public void DeleteTitle(Title title)
+        public void Delete(Title title)
         {
             c.Remove(title);
             c.SaveChanges();
         }
 
-        public Title GetById(int id)
+        public Title GetByID(int id)
         {
             return c.Titles.Find(id);
         }
 
-        public List<Title> ListAllTitle()
+        public List<Title> GetListAll()
         {
             return c.Titles.ToList();
         }
 
-        public void UpdateTitle(Title title)
+        public void Update(Title title)
         {
             c.Update(title);
             c.SaveChanges();

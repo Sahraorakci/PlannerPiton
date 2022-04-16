@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlannerPiton.DataAccessLayer\PlannerPiton.DataAccessLayer.csproj" />
-    <ProjectReference Include="..\PlannerPiton.EntityLayer\PlannerPiton.EntityLayer.csproj" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValidationRules\" />
+    <ProjectReference Include="..\PlannerPiton.DataAccessLayer\PlannerPiton.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PlannerPiton.EntityLayer\PlannerPiton.EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>

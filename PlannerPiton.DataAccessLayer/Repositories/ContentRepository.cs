@@ -12,29 +12,29 @@ namespace PlannerPiton.DataAccessLayer.Repositories
     public class ContentRepository : IGenericDal<Content>
     {
         Context c = new Context();
-        public void AddContent(Content content)
+        public void Insert(Content content)
         {
             c.Add(content);
             c.SaveChanges();
         }
 
-        public void DeleteContent(Content content)
+        public void Delete(Content content)
         {
             c.Remove(content);
             c.SaveChanges();
         }
 
-        public Content GetById(int id)
+        public Content GetByID(int id)
         {
             return c.Contents.Find(id);
         }
 
-        public List<Content> ListAllContent()
+        public List<Content> GetListAll()
         {
             return c.Contents.ToList();
         }
 
-        public void UpdateContent(Content content)
+        public void Update(Content content)
         {
             c.Update(content);
             c.SaveChanges();

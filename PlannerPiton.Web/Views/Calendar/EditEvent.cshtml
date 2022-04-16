@@ -1,0 +1,30 @@
+﻿@model PlannerPiton.EntityLayer.Concrete.Event
+@{
+    Layout = null;
+}
+
+<br />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<h2>ETKİNLİK GÜNCELLEME SAYFASI</h2>
+@using (Html.BeginForm("EditEvent", "Calendar", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.Label("Etkinlik adı")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    @Html.Label("Etkinlik Başlangıç Tarihi")
+    @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Etkinlik Bitiş Tarihi")
+    @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Arka Plan Rengi")
+    @Html.TextBoxFor(x => x.BackgroundColor, new { @class = "form-control" })
+    <br />
+    @Html.Label("Etkinliğin Takvimdeki Rengi")
+    @Html.TextBoxFor(x => x.BorderColor, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">GÜNCELLE</button>
+</div>
+}
+
